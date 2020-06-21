@@ -8,14 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Please register your username and password </title>
+    <title>Registration </title>
 </head>
 <body>
 <p>
     ${error}
 </p>
 <p>
-<form method="post">
+<h1>Register</h1>
+<form action="/register" form method="post">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name" required>
+    <br>
     <label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" required>
     <br>

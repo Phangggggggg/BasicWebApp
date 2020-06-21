@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends AbstractRoutableServlet {
-    private FakeDataBase fakeDataBase = new FakeDataBase();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher=req.getRequestDispatcher("WEB-INF/login.jsp");
         requestDispatcher.include(req,resp);
+        //doPost(req, resp);
 
     }
 
@@ -22,8 +22,11 @@ public class LoginServlet extends AbstractRoutableServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        if(authentication.login(req)){
-            resp.sendRedirect("/home");
+        if(authentication.login(username, password)){
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("username",username);
+            httpSession.setAttribute("password",password);
+            resp.sendRedirect("/");
         }
         else {
             String error = "Invalid username or password! Please try again";

@@ -12,7 +12,7 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8080);
 
-        File docBase = new File("/Users/phang/Desktop/Homework3/src/main/webapp");
+        File docBase = new File("/Users/phang/Desktop/BasicWebApp/Homework3/src/main/webapp");
         docBase.mkdirs(); // in case there is no directory, but this case there is which is WEB-INF
 
         try {

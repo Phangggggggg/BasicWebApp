@@ -1,21 +1,35 @@
 package authentication;
 
+
+import DataBase.DataBase;
 import muzoo.io.ooc.webapp.FakeDataBase;
+import java.sql.*;
+import java.util.List;
+
 
 public class UserService {
-    private FakeDataBase fakeDataBase;
+    private DataBase dataBase;
 
-    public UserService(FakeDataBase fakeDataBase) {
-        this.fakeDataBase = fakeDataBase;
+    public UserService() {
+        this.dataBase = new DataBase();
     }
 
-    public User getUserByUsername(String username){
-        return new User(username,fakeDataBase.getPassword(username));
+    public boolean checkUser(String username, String password){
+        return this.dataBase.checkUser(username, password);
     }
-    public void addUser(String user,String password){
-        fakeDataBase.addDataBase(user,password);
+    public void addUser(String name, String username,String password) throws ClassNotFoundException, SQLException {
+        dataBase.addDatabase(name,username,password);
     }
 
+    public List<User> getAllUser() {
+        return dataBase.getAllUser();
+    }
+    public void removeUser(String username){
+        dataBase.deleteUser(username);
+    }
+    public void editUser(String targetName, String editName){
+        dataBase.editNameofUser(targetName,editName);
 
+    }
 
 }

@@ -1,5 +1,6 @@
 package muzoo.io.ooc.webapp;
 
+import DataBase.DataBase;
 import authentication.Authentication;
 import authentication.UserService;
 import org.apache.catalina.*;
@@ -28,32 +29,35 @@ public class ServletRouter extends HttpServlet {
 
 
     private final List<Class<? extends AbstractRoutableServlet>> servletClasses = new ArrayList<>();
-    public void initialisation(Context context)  {
-        FakeDataBase fakeDataBase = new FakeDataBase();
-        UserService userService = new UserService(fakeDataBase);
+
+    public void initialisation(Context context) {
+        UserService userService = new UserService();
         Authentication authentication = new Authentication(userService);
         servletClasses.add(HomeServlet.class);
         servletClasses.add(LoginServlet.class);
         servletClasses.add(RegisterServlet.class);
-        for (Class<? extends AbstractRoutableServlet>  servletClass : servletClasses) {
-            AbstractRoutableServlet httpServlet = null;
+        servletClasses.add(ListPageServlet.class);
+        servletClasses.add(EditServlet.class);
+        for (Class<? extends AbstractRoutableServlet> servletClass : servletClasses) {
             try {
-                httpServlet = servletClass.getDeclaredConstructor().newInstance();
+                AbstractRoutableServlet httpServlet = servletClass.getDeclaredConstructor().newInstance();
+                httpServlet.setAuthentication(authentication);
+                Tomcat.addServlet(context, httpServlet.getClass().getName(), httpServlet);
+                context.addServletMapping(httpServlet.getPattern(), httpServlet.getClass().getName());
+
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
-            httpServlet.setAuthentication(authentication);
-            Tomcat.addServlet(context,httpServlet.getClass().getName(),httpServlet);
-            context.addServletMapping(httpServlet.getPattern(),httpServlet.getClass().getName());
-        }
+
 
         }
 
 
+    }
 }

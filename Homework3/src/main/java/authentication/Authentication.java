@@ -23,20 +23,11 @@ public class Authentication {
         return session.getAttribute("username") != null;
     }
 
+    public boolean login(String username, String password){
+        if (username != null){
 
-    public boolean login(HttpServletRequest req){
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        User user = userService.getUserByUsername(username);
-        if (user.getPassword().equals(password)) {
-            HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("username",username);
-            return true;
         }
-        else {
-            return false;
-        }
-
+        return userService.checkUser(username, password);
     }
 
     public void logout(HttpServletRequest req){
@@ -48,5 +39,7 @@ public class Authentication {
     public UserService getUserService() {
         return userService;
     }
+
+
 
 }
