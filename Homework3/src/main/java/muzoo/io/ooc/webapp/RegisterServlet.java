@@ -1,5 +1,8 @@
 package muzoo.io.ooc.webapp;
 
+import HashAndSalt.BCrypt;
+import authentication.UserService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +24,12 @@ public class RegisterServlet extends AbstractRoutableServlet{
         String name = String.valueOf(req.getParameter("name"));
         String username = String.valueOf(req.getParameter("username"));
         String password = String.valueOf(req.getParameter("password"));
+        UserService userService = authentication.getUserService();
         try {
-            if (!authentication.getUserService().checkUser(username,password) &&
-                    !authentication.getUserService().checkRepeatedUN(username)){
-                authentication.getUserService().addUser(name,username,password);
+            if (!userService.checkUser(username,password) &&
+                    !userService.checkRepeatedUN(username)){
+                String hashSaltPwd = userService.hashSaltCal(password);
+                authentication.getUserService().addUser(name,username,hashSaltPwd);
             }
             resp.sendRedirect("/listpage");
         } catch (ClassNotFoundException e) {

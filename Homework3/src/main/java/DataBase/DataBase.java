@@ -56,6 +56,21 @@ public class DataBase extends DataBaseConnection {
 
     }
 
+    public String getPassword(String username){
+        try {
+            String query = "SELECT password FROM user_table WHERE USERNAME = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                return rs.getString("password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return username;
+    }
+
 
 
     public boolean checkUser(String username, String password) {
@@ -119,6 +134,11 @@ public class DataBase extends DataBaseConnection {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        DataBase dt = new DataBase();
+        System.out.println(dt.getPassword("phang"));
     }
 }
 

@@ -24,10 +24,20 @@ public class Authentication {
     }
 
     public boolean login(String username, String password){
+        String hash = userService.getPWD(username);
         if (username != null){
+            if (userService.checkPassword(password,hash)){
+                return userService.checkUser(username, hash);
+            }
+            else {
+                return false;
+            }
 
         }
-        return userService.checkUser(username, password);
+        else {
+            return false;
+        }
+
     }
 
     public void logout(HttpServletRequest req){

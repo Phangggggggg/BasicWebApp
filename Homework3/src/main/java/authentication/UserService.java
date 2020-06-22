@@ -2,6 +2,7 @@ package authentication;
 
 
 import DataBase.DataBase;
+import HashAndSalt.BCrypt;
 import muzoo.io.ooc.webapp.FakeDataBase;
 import java.sql.*;
 import java.util.List;
@@ -9,9 +10,12 @@ import java.util.List;
 
 public class UserService {
     private DataBase dataBase;
+    private BCrypt bCrypt;
 
     public UserService() {
         this.dataBase = new DataBase();
+        this.bCrypt = new BCrypt();
+
     }
 
     public boolean checkUser(String username, String password){
@@ -35,5 +39,15 @@ public class UserService {
        return dataBase.checkRepeatedUserName(username);
 
     }
+    public String hashSaltCal(String password){
+        return bCrypt.hashSaltConversion(password);
+    }
+    public boolean checkPassword(String original,String hash){
+        return bCrypt.isMatched(original,hash);
+    }
+    public String getPWD(String userName){
+        return dataBase.getPassword(userName);
+    }
+
 
 }
