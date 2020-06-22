@@ -22,7 +22,10 @@ public class RegisterServlet extends AbstractRoutableServlet{
         String username = String.valueOf(req.getParameter("username"));
         String password = String.valueOf(req.getParameter("password"));
         try {
-            authentication.getUserService().addUser(name,username,password);
+            if (!authentication.getUserService().checkUser(username,password) &&
+                    !authentication.getUserService().checkRepeatedUN(username)){
+                authentication.getUserService().addUser(name,username,password);
+            }
             resp.sendRedirect("/listpage");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

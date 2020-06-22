@@ -31,5 +31,9 @@ public class UserService {
         dataBase.editNameofUser(targetName,editName);
 
     }
+    public boolean checkRepeatedUN(String username){
+       return dataBase.checkRepeatedUserName(username);
+
+    }
 
 }

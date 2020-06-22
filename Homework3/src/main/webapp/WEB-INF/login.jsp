@@ -12,7 +12,7 @@
     </head>
     <body>
     <h1>
-        <title>Login</title>
+        Login
     </h1>
         <p>
             ${error}

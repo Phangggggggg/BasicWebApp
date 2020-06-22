@@ -7,8 +7,8 @@ public class DataBaseConnection {
     public DataBaseConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework3","root"
-            ,"phang789");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/homework3","PhangPhang"
+            ,"PhangPhang789");
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

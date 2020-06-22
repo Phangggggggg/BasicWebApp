@@ -14,12 +14,14 @@
 <p>
     ${cantDelete}
     ${canDelete}
+    ${repeated}
+
 </p>
     <center>
         <h2> User list </h2>
         <table bordercolor="black" border="1px solid black" width="400px">
             <thead>
-                <tr bgcolor="#7fffd4">
+                <tr bgcolor="#FFD700">
                     <th>No.</th>
                     <th>Name</th>
                     <th>Username</th>
@@ -35,12 +37,12 @@
                         <td><%=allUser.get(i).getUserName()%></td>
                         <td>
                             <form action= "/listpage" method="post">
-                                <button type="submit" name="delete" value=<%=allUser.get(i).getUserName()%> style="background-color:#fff980">Delete
+                                <button type="submit" name="delete" value=<%=allUser.get(i).getUserName()%> style="background-color:#F5F5DC">Delete
                                 </button>
                             </form>
                         </td>
                         <td> <form action= "/listpage" method="post">
-                            <button type="submit" name="edit" value=<%=allUser.get(i).getName()%> style="background-color:#fff980">Edit
+                            <button type="submit" name="edit" value=<%=allUser.get(i).getUserName()%> style="background-color:#F5F5DC">Edit
                             </button>
                         </form></td>
                     </tr>

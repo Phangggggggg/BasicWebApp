@@ -14,7 +14,6 @@ public class LoginServlet extends AbstractRoutableServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher=req.getRequestDispatcher("WEB-INF/login.jsp");
         requestDispatcher.include(req,resp);
-        //doPost(req, resp);
 
     }
 
@@ -39,6 +38,5 @@ public class LoginServlet extends AbstractRoutableServlet {
     @Override
     public String getPattern() {
         return "/login";
-
     }
 }

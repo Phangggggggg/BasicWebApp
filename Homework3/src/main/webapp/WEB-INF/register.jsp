@@ -12,7 +12,7 @@
 </head>
 <body>
 <p>
-    ${error}
+    ${repeated}
 </p>
 <p>
 <h1>Register</h1>

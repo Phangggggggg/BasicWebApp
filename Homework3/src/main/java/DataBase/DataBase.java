@@ -38,6 +38,24 @@ public class DataBase extends DataBaseConnection {
         return null;
     }
 
+    public boolean checkRepeatedUserName(String username){
+        boolean result  = false;
+        try {
+            String query = "SELECT * FROM user_table WHERE USERNAME = ? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next())
+                result = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+
+
+    }
+
 
 
     public boolean checkUser(String username, String password) {
@@ -70,7 +88,7 @@ public class DataBase extends DataBaseConnection {
 
     public void editNameofUser(String targetName,String editName){
         try {
-            String query = "UPDATE user_table SET NAME = ? WHERE NAME = ?";
+            String query = "UPDATE user_table SET NAME = ? WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, editName);
             preparedStatement.setString(2, targetName);
