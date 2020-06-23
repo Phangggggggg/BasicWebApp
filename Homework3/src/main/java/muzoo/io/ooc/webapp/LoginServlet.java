@@ -25,7 +25,8 @@ public class LoginServlet extends AbstractRoutableServlet {
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("username",username);
             httpSession.setAttribute("password",password);
-            resp.sendRedirect("/");
+            resp.sendRedirect("/home");
+
         }
         else {
             String error = "Invalid username or password! Please try again";

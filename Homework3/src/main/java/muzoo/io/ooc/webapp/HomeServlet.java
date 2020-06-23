@@ -12,7 +12,7 @@ public class HomeServlet extends AbstractRoutableServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
-        if(authentication.isAuthenticated(req)) {
+        if(authentication.isAuthenticated(req,resp)) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/home.jsp");
             requestDispatcher.include(req, resp);
         }
@@ -30,6 +30,6 @@ public class HomeServlet extends AbstractRoutableServlet {
 
     @Override
     public String getPattern() {
-        return "/index.jsp";
+        return "/home";
     }
 }

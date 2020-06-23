@@ -51,6 +51,8 @@ public class DataBase extends DataBaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
         return result;
 
 
@@ -68,6 +70,7 @@ public class DataBase extends DataBaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return username;
     }
 
@@ -87,6 +90,8 @@ public class DataBase extends DataBaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
         return result;
     }
 
@@ -99,6 +104,7 @@ public class DataBase extends DataBaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public void editNameofUser(String targetName,String editName){
@@ -111,6 +117,7 @@ public class DataBase extends DataBaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -133,7 +140,13 @@ public class DataBase extends DataBaseConnection {
         catch (SQLException e) {
             e.printStackTrace();
         }
+
         return result;
+    }
+
+    @Override
+    public Connection getConnection() {
+        return connection;
     }
 
     public static void main(String[] args) {

@@ -31,12 +31,12 @@ public class RegisterServlet extends AbstractRoutableServlet{
                 String hashSaltPwd = userService.hashSaltCal(password);
                 authentication.getUserService().addUser(name,username,hashSaltPwd);
             }
-            resp.sendRedirect("/listpage");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        resp.sendRedirect("/listpage");
 
     }
 

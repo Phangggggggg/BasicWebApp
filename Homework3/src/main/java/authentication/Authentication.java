@@ -1,10 +1,8 @@
 package authentication;
 
-import muzoo.io.ooc.webapp.AbstractRoutableServlet;
 
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Authentication {
@@ -18,7 +16,7 @@ public class Authentication {
         return (String) session.getAttribute("username");
     }
 
-    public boolean isAuthenticated(HttpServletRequest req){
+    public boolean isAuthenticated(HttpServletRequest req, HttpServletResponse res){
         HttpSession session = req.getSession();
         return session.getAttribute("username") != null;
     }
@@ -40,6 +38,10 @@ public class Authentication {
 
     }
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     public void logout(HttpServletRequest req){
         HttpSession httpSession = req.getSession();
         httpSession.removeAttribute("username");
@@ -49,7 +51,6 @@ public class Authentication {
     public UserService getUserService() {
         return userService;
     }
-
 
 
 }
